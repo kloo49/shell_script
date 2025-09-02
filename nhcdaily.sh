@@ -2,11 +2,11 @@
 
 ###### USER SPECIFIC INPUT ######
 # local path to agsd's shared workspace
-dropbox_path="/Users/kyloo/agsd Dropbox/agsd's shared workspace"
+dropbox_path="$HOME/agsd Dropbox/agsd's shared workspace"
 # local path to your downloads folder
-download_path="/Users/kyloo/Downloads/"
+download_path="$HOME/Downloads/"
 # local path to your desktop
-desktop_path="/Users/kyloo/Desktop/"
+desktop_path="$HOME/Desktop/"
 
 ###### DO NOT MODIFY ######
 
@@ -21,15 +21,15 @@ oceans=("atlantic" "epac" "cpac")
 for i in "${oceans[@]}"; do
     cd "$download_path"
     if [ -e "$date"_"$i".png ]; then
-        mv "$download_path"/"$date"_"$i".png "$screenshot_path"/"$date"
-        echo "Disturbances in the $i."
+        mv "$download_path""$date"_"$i".png "$screenshot_path"/"$date"
+        echo "Disturbance in the $i."
     else
         cd "$desktop_path"
         if [ -e "$date"_"$i".png ]; then
-            mv "$desktop_path"/"$date"_"$i".png "$screenshot_path"/"$date"
-            echo "Disturbances in the $i."
+            mv "$desktop_path""$date"_"$i".png "$screenshot_path"/"$date"
+            echo "Disturbance in the $i."
         else
-            echo "No disturbance in the $i."
+            echo "No disturbanc in the $i."
         fi
     fi
 done

@@ -1,7 +1,7 @@
 # !/bin/bash
 
 # create folder in screenshots_tropical_tidbits
-cd "/Users/kyloo/agsd Dropbox/agsd's shared workspace/data_temp/tc25_usaf_aro/screenshot_tropical_tidbits"
+cd "$HOME/agsd Dropbox/agsd's shared workspace/data_temp/tc25_usaf_aro/screenshot_tropical_tidbits"
 
 echo -n "Enter flight date (YYYY-MM-DD): "
 read -r date

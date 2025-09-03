@@ -31,7 +31,7 @@ https://www.dropbox.com/scl/fi/7vm0j174846pcawofppav/tc25_recovery_datalog.xlsx?
 echo " "
 
 open -na "$browser" --args --new-window $websites
-open /Users/kyloo/agsd\ Dropbox/agsd\'s\ shared\ workspace/data_temp/tc25_usaf_aro/forecast_record_tc25.docx 
+open ~/agsd\ Dropbox/agsd\'s\ shared\ workspace/data_temp/tc25_usaf_aro/forecast_record_tc25.docx 
 
 
 echo "...browser opened."

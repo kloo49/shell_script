@@ -77,7 +77,7 @@ if [ -e *.tgz ]; then
 
     cp *.tgz ~/launchpad
     cd ~/launchpad
-    tar -xvzf *.tgz
+    tar -xzf *.tgz
 
     for file in *.txt; do
         mv "$file" "${file/\Data\\\\/}"

@@ -1,18 +1,19 @@
 # !/bin/bash
 
+'''
+Downloads NHC POD as a .txt file from NHC POD website.
+
+INPUT: None
+
+OUTPUT: DATE_pod.txt
+'''
+
 # navigate to NHC POD archive folder
 cd "$HOME/agsd Dropbox/agsd's shared workspace/data_temp/tc25_usaf_aro/nhc_pod"
 
 year=$(date "+%Y")
 date=$(date "+%Y%m%d")
 fdate=$(date "+%Y-%m-%d")
-
-# # create a .txt with POD
-# today=$(curl https://www.nhc.noaa.gov/archive/recon/2025/REPRPD/ | grep "$date")
-# echo $today
-# curl https://www.nhc.noaa.gov/archive/recon/"$year"/REPRPD/REPRPD."$date"????.txt > "$fdate"_pod.txt
-
-
 
 # use nhc plan of day website
 curl https://www.nhc.noaa.gov/text/MIAREPRPD.shtml > "$fdate"_pod.txt

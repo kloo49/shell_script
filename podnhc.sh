@@ -1,12 +1,12 @@
 # !/bin/bash
 
-'''
-Downloads NHC POD as a .txt file from NHC POD website.
+# '''
+# Downloads NHC POD as a .txt file from NHC POD website.
 
-INPUT: None
+# INPUT: None
 
-OUTPUT: DATE_pod.txt
-'''
+# OUTPUT: DATE_pod.txt
+# '''
 
 # navigate to NHC POD archive folder
 cd "$HOME/agsd Dropbox/agsd's shared workspace/data_temp/tc25_usaf_aro/nhc_pod"

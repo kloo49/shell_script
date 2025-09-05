@@ -1,6 +1,6 @@
 # !/bin/bash
 
-'''
+: <<'CONVENTION'
 This code scans through user desktop and downloads folder for nhc screenshots, then moves the files to agsd dropbox.
 The current date is taken and creates a folder in /data_temp/tc25_usaf_aro/screenshot_nhc/. Then, the files are saved here.
 This script must be run on the same day that the screenshots were saved.
@@ -11,7 +11,7 @@ OUTPUT:
 - New directory created in screenshot_nhc with the current date as the file name.
 - Moves any YYYY-MM-DD_atlantic.png, YYYY-MM-DD_epac.png, and YYYY-MM-DD_cpac.png if available.
 - Moves any YYYY-MM-DD_STORMNAME_cone.png if available.
-'''
+CONVENTION
 
 # local path to agsd's shared workspace
 dropbox_path="$HOME/agsd Dropbox/agsd's shared workspace"
@@ -45,11 +45,9 @@ for i in "${oceans[@]}"; do
 done
 
 # move *_cone.png to dropbox screenshot_nhc directory
-cd "$download_path"
 cone=($(find "$download_path" -name "*_cone.png*"))
 
 for file in "${cone[@]}"; do
-    echo "$file"
     mv "$file" "$screenshot_path"/"$date"
     echo "Cone projection moved to Dropbox."
     # echo "There are no cone projections."

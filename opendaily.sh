@@ -1,6 +1,6 @@
 # !/bin/bash/
 
-'''
+: << 'CONVENTION'
 This code opens all the links that needs to be checked daily.
 - Tropical Tidbits (Recon and Storm Info)
 - Tropical Atlantic (Current recon)
@@ -10,7 +10,7 @@ This code opens all the links that needs to be checked daily.
 INPUT: None
 
 OUTPUT: Websites mentioned above opens in a new window.
-'''
+CONVENTION
 
 cd /Applications/ 
 echo "Starting process..."

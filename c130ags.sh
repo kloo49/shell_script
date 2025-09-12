@@ -1,29 +1,43 @@
 # !/bin/bash
 
 # This script assumes you have dropbox and ags mounted to your local machine.
+dropbox_path="$HOME/agsd Dropbox/agsd's shared workspace"
 
 echo -n "Enter flight date (YYYY-MM-DD): "
 read -r date
 doy=$(date -j -f "%Y-%m-%d" "$date" +%j)
-echo $doy
+year="${date:0:4}"
+y="${date:2:2}"
+# echo $year
 
-echo -n "Enter storm name: "
-read -r storm
-
-echo -n "Enter ARO flight id: "
+echo -n "Enter ARO flight ID: "
 read -r flightid
 
-echo -n "Enter tail number: "
-read -r tail
+echo -n "Enter receiver ID: "
+read -r receiver
 
-# create file in ags data
-cd ~/ags/data/hiaper/2025.181_tc2025
-mkdir 2025."$doy"_"$flightid"_"$tail"
-cd 2025."$doy"_"$flightid"_"$tail"
-mkdir gpsdata_asterxsb3
-cd gpsdata_asterxsb3
-mkdir sbf
-cd sbf
-cp ~/agsd\ Dropbox/agsd\'s\ shared\ workspace/data_temp/tc25_usaf_aro/1_complete/"$date"_"$storm"_"$tail"/a*t*.25_ ~/ags/data/hiaper/2025.181_tc2025/2025."$doy"_"$flightid"_"$tail"/gpsdata_asterxsb3/sbf/
+createsbf () {
+    cd $HOME/ags/data/hiaper/$campaign
+    mkdir $year."$doy"_"$flightid"_"$receiver"
+    cd $year."$doy"_"$flightid"_"$receiver"
+    mkdir gpsdata_asterxsb3
+    cd gpsdata_asterxsb3
+    mkdir sbf
+}
+if [[ "$year" == "2025" ]]; then
+    campaign="2025.181_tc2025"
+    datatemp="tc25_usaf_aro"
+    createsbf
+    echo -n "Enter storm name: "
+    read -r storm
+    echo -n "Enter tail ID: "
+    read -r tail
+    cp "$dropbox_path"/data_temp/"$datatemp"/1_complete/"$date"_"$storm"_"$tail"/a*t*."$y"_ $HOME/ags/data/hiaper/"$campaign"/"$year"."$doy"_"$flightid"_"$receiver"/gpsdata_asterxsb3/sbf/
+elif [[ "$year" == "2024" ]]; then
+    campaign="2024.162_tc2024"
+    datatemp="tc24_usaf_aro"
+    createsbf
+    cp "$dropbox_path"/data_temp/"$datatemp"/1_complete/"$year"."$doy"_*_"$receiver"/"$receiver"*."$y"_ $HOME/ags/data/hiaper/"$campaign"/"$year"."$doy"_"$flightid"_"$receiver"/gpsdata_asterxsb3/sbf/
+fi
 
 echo "ARO file copied to sbf."

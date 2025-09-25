@@ -9,31 +9,19 @@ INPUT:
 - User input: y/n
 If y,
     - User input: date the flight
-    - User input: aircraft type
+    - User input: aircraft type (+ mission if the same aircraft has multiple missions)
 
 OUTPUT: 
 - Recon screenshots moved to /screenshot_tropical_tidbits/DATE_TAIL
 - Storm screenshots moved to /screenshot_tropical_tidbits
 
-NOTES: NOAA flight recon has not been tested yet.
 CONVENTION
 
 # # path
 dropbox_path="$HOME/agsd Dropbox/agsd's shared workspace"
 tt_path="$dropbox_path""/data_temp/tc25_usaf_aro/screenshot_tropical_tidbits"
-download_path="$HOME/Desktop/aircraft-imgs"
-
-# # functions
-stormforecasts () {
-    if [ -z "$1" ];then
-        echo "No $2 screenshots found."
-    else
-        for f in "$1"; do
-            mv "$f" "$tt_path"
-            echo "$2 screenshot saved."
-        done
-    fi
-}
+aircraft_path="$tt_path/aircraft_imgs_unsorted"
+download_path="$HOME/Downloads"
 
 # # initializing code
 echo -n "Archiving flight? (y/n): "
@@ -44,7 +32,7 @@ if [ $yn == "y" ]; then
     echo -n "Enter flight date (YYYY-MM-DD): "
     read -r date
 
-    echo -n "Enter aircraft (AF30x/NOAAx): "
+    echo -n "Enter aircraft (AF30x/NOAAx-missionID): "
     read -r tail
 
     # Change to lowercase to create directory
@@ -55,11 +43,21 @@ if [ $yn == "y" ]; then
     # # Find the file
     # Change to uppercase to find file in Downloads folder
     tailfind=$(echo "$tail" | tr '[:lower:]' '[:upper:]' )
-    mv "$download_path"/recon_$tailfind* "$tt_path"/"$date"_"$tailname"/
+    mv "$aircraft_path"/recon_$tailfind* "$tt_path"/"$date"_"$tailname"/
     echo "Tropical Tidbits flight screenshots moved."
 else
     track=($(find "$download_path" -name "*_track.png*"))
-    intensity=($(find "$download_path" -name "*_intensity.png*"))   
-    stormforecasts "${track[@]}" "Track"
-    stormforecasts "${intensity[@]}" "Intensity"
+    for i in "${track[@]}";do
+        if [ -f "$i" ];then
+            mv "$i" "$tt_path"
+            echo "$i has been moved to Dropbox."
+        fi
+    done
+    intensity=($(find "$download_path" -name "*_intensity.png*"))  
+    for i in "${intensity[@]}";do
+        if [ -f "$i" ];then
+            mv "$i" "$tt_path"
+            echo "$i has been moved to Dropbox."
+        fi
+    done
 fi

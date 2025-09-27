@@ -32,7 +32,7 @@ if [[ "$year" == "2025" ]]; then
     read -r storm
     echo -n "Enter tail ID: "
     read -r tail
-    cp "$dropbox_path"/data_temp/"$datatemp"/1_complete/"$date"_"$storm"_"$tail"/a*t*."$y"_ $HOME/ags/data/hiaper/"$campaign"/"$year"."$doy"_"$flightid"_"$receiver"/gpsdata_asterxsb3/sbf/
+    cp "$dropbox_path"/data_temp/"$datatemp"/1_complete/"$date"_"$storm"_"$tail"/"$receiver"*."$y"_ $HOME/ags/data/hiaper/"$campaign"/"$year"."$doy"_"$flightid"_"$receiver"/gpsdata_asterxsb3/sbf/
 elif [[ "$year" == "2024" ]]; then
     campaign="2024.162_tc2024"
     datatemp="tc24_usaf_aro"

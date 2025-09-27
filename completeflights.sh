@@ -9,6 +9,9 @@ INPUT: Flight date, storm name, tail number, and mission ID.
 OUTPUT:
 - new directory in "1_complete", titled "YYYY-MM-DD_STORM_TAIL"
 - in this new directory, the .SUM, *.25_, and expanded .tgz files will be copied over.
+
+to work on: if there are two ARO files with .25_ and .25_.A, only .25_.A file gets transfered.
+
 CONVENTION
 
 # local path to google drive 2025 NHOP folder
@@ -39,6 +42,7 @@ month="${date:5:2}"
 # check if flight exists
 cd "$gdrive_path"/"$month"*
 
+echo "$mission"
 if [ -d *"$mission"* ]; then
     # flight data has been upload, time to create directory to store data in agsd dropbox
     echo "Flight data exists."
@@ -67,6 +71,11 @@ cd "$gdrive_path"/"$month"*/*"$mission"*
 if [ -e *.25_.A ]; then
     echo "ARO file exists."
     cp *.25_.A "$dropbox_path"/"$date"_"$storm"_"$tail"
+    # rename ARO file
+    cd "$dropbox_path"/"$date"_"$storm"_"$tail"
+    for arofile in a*.25_.A; do
+        mv "$arofile" "${arofile/.A/}"
+    done
 else
     if [ -e *.25_ ]; then
         echo "ARO file exists."
@@ -75,11 +84,7 @@ else
         echo "ARO file doesn't exist, flight data is incomplete."
     fi
 fi
-# rename ARO file
-cd "$dropbox_path"/"$date"_"$storm"_"$tail"
-for arofile in a*.25_.A; do
-    mv "$arofile" "${arofile/.A/}"
-done
+
 filename=$(find . -name *.25_)
 echo "ARO file name: $filename."
 
